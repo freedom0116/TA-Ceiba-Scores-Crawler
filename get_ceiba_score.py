@@ -114,7 +114,7 @@ for i in range(len(hw_data)):
 
 # export to excel
 wb = openpyxl.Workbook()
-sheet = wb.create_sheet("離岸風力發電導論", 0)
+sheet = wb.create_sheet("成績1", 0)
 
 for data in wb_data:
     sheet.append(data)
