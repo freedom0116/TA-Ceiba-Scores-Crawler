@@ -4,7 +4,7 @@
 將指定課程中的所有作業成績抓下來，並整理成一份excel
 
 
-##執行需求
+## 執行需求
  * [Python3](https://www.python.org/): 編寫版本為version 3.7
  * [Selenium](https://www.selenium.dev/): 模擬使用者的自動化操作套件，操作使用的的webdriver為chrome
  * [Beautifulsoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/): 解析及取得HTML原始碼各個標籤的元素資料
