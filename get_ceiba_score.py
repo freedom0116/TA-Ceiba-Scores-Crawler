@@ -6,12 +6,9 @@ import openpyxl
 
 
 url = "https://ceiba.ntu.edu.tw/index.php"
-# TA_account = 'ta_chinglin'
-# TA_password = 'bf9e6d'
-# Semester = "109-1" # ex: 109-1
 TA_account = input('Please input CEIBA account: ')
 TA_password = input('Please input CEIBA password: ')
-Semester = input('Assign semester: ')
+Semester = input('Assign semester(if u don\'t need to change, just push enter): ')
 
 options = Options()
 options.add_argument("--disable-notifications")
@@ -23,7 +20,7 @@ chrome.get(url)
 def choose_semester():
     if Semester == "":
         return
-
+    
     chrome.find_element_by_css_selector("select[name='select_d0']").click()
     chrome.find_element_by_css_selector("option[value='index.php?seme_op=" + Semester + "']").click()
 
@@ -86,7 +83,7 @@ for i in range(1, len(hw_table)):
         continue;
 
     hw_path = '/html/body/div[1]/div[3]/div[2]/div/table/tbody/tr[' + str(i) + ']/td[7]/input'
-    print(hw_path)
+    print(hw_titles[i-2])
     chrome.find_element_by_xpath(hw_path).click()
     if i == 2:
         get_students()

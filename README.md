@@ -10,3 +10,9 @@
  * [Beautifulsoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/): 解析及取得HTML原始碼各個標籤的元素資料
  * [time](https://docs.python.org/3/library/time.html): 防止短時間內大量存取而被Ban
  * [openpyxl](https://openpyxl.readthedocs.io/en/stable/): 將資料寫入excel
+
+
+## 輸入資料
+ * CEIBA account
+ * CEIBA password
+ * Assign semester: 如果是抓取當學期學期則直接按Enter跳過。但若是需要抓以前的課程(非本學期)，則輸入指定學期(ex: 109-1)
