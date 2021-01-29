@@ -6,9 +6,12 @@ import openpyxl
 
 
 url = "https://ceiba.ntu.edu.tw/index.php"
-TA_account = 'ta_chinglin'
-TA_password = 'bf9e6d'
-Semester = "109-1" # ex: 109-1
+# TA_account = 'ta_chinglin'
+# TA_password = 'bf9e6d'
+# Semester = "109-1" # ex: 109-1
+TA_account = input('Please input CEIBA account: ')
+TA_password = input('Please input CEIBA password: ')
+Semester = input('Assign semester: ')
 
 options = Options()
 options.add_argument("--disable-notifications")
@@ -18,21 +21,24 @@ chrome.get(url)
 
 # enter ceiba
 def choose_semester():
+    if Semester == "":
+        return
+
     chrome.find_element_by_css_selector("select[name='select_d0']").click()
     chrome.find_element_by_css_selector("option[value='index.php?seme_op=" + Semester + "']").click()
 
 
 def get_scores(n):
-    chrome.find_element_by_xpath('/html/body/div/div[3]/div[2]/div/div/form/div[2]/a').click()
+    chrome.find_element_by_link_text("此作業所有列表").click()
     soup = BeautifulSoup(chrome.page_source, 'lxml')
     sub_scores = soup.find('table').find_all(['tbody', 'input'], { 'name': 'old_rank_choice[]' })
     for i in sub_scores:
         hw_scores[n - 2].append(i.attrs['value'])
 
-    chrome.find_element_by_xpath('/html/body/div/div[3]/div[2]/ul/li[2]/a').click()
+    chrome.find_element_by_link_text("批改作業").click()
 
 def get_students():
-    chrome.find_element_by_xpath('/html/body/div/div[3]/div[2]/div/div/form/div[2]/a').click()
+    chrome.find_element_by_link_text("此作業所有列表").click()
     soup = BeautifulSoup(chrome.page_source, 'lxml')
     sub_students = soup.find('table').find_all(['tbody', 'tr'])
     for i, student in enumerate(sub_students):        
@@ -43,7 +49,7 @@ def get_students():
         students_id.append(student_info[5].text)
         students_name.append(student_info[7].text)
 
-    chrome.find_element_by_xpath('/html/body/div/div[3]/div[2]/ul/li[2]/a').click()
+    chrome.find_element_by_link_text("批改作業").click()
 
 
 chrome.find_element_by_css_selector("input[type='radio'][name='class'][value='1']").click()
@@ -54,13 +60,11 @@ chrome.find_element_by_css_selector("input[type='submit'][value='登入']").clic
 
 time.sleep(1)
 
-# if the semester on ceiba change, use it. On the other hand, u can toggle choose_semeter
 choose_semester()
 
-chrome.find_element_by_css_selector("input[name='b1'][value='管理']").click()
-chrome.find_element_by_xpath('/html/body/div[1]/div[3]/form/table/tbody/tr[15]/td[3]/input').click()
-chrome.find_element_by_css_selector("a[href='?op=hw_corr']").click()
-
+chrome.find_element_by_name("b1").click()
+chrome.find_element_by_xpath("//input[@onclick=\"singleadm('hw')\"]").click()
+chrome.find_element_by_link_text("批改作業").click()
 soup = BeautifulSoup(chrome.page_source, 'lxml')
 hw_table = soup.find(['div', 'table'], {'id': 'sect_cont'}).find_all(['tbody', 'tr'])
 
@@ -109,6 +113,7 @@ wb_data = [['' for _ in range(len(hw_data))] for _ in range(len(hw_data[0]))]
 for i in range(len(hw_data)):
     for j in range(len(hw_data[0])):
         wb_data[j][i] = hw_data[i][j]
+
 
 # export to excel
 wb = openpyxl.Workbook()
