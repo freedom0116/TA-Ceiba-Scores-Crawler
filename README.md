@@ -1,7 +1,7 @@
 # Get-Ceiba-Scores
 
 自動從[台大課程網站CEIBA](https://ceiba.ntu.edu.tw/index.php)以TA帳號登入，
-將指定課程中的所有作業成績抓下來，並整理成一份excel
+將指定課程中的全部作業成績抓下來，並整理成一份excel
 
 
 ## 執行需求
@@ -15,4 +15,4 @@
 ## 輸入資料
  * CEIBA account
  * CEIBA password
- * Assign semester: 如果是抓取當學期學期則直接按Enter跳過。但若是需要抓以前的課程(非本學期)，則輸入指定學期(ex: 109-1)
+ * Assign semester: 如果要抓取當前學期的課程成績則直接按Enter跳過。但若要抓以前的課程(非本學期)，則需輸入指定學期(ex: 109-1)
